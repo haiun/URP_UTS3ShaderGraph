@@ -72,15 +72,15 @@ Rendering Debugger / Display Stats에서 DrawOpaqueObjects CPU/GPU 항목에서 
 | OPT | 1.39~1.42 ms | 2.81~2.90 ms | 1.48~1.50 ms | 4.59~4.70 ms |
 | 속도향상 | +46.6% | +132.5% | +38.3% | +44.3% |
 
-Frame Debugger으로 확인한 상수버퍼의 float갯수가 4624개(float320개, vector4 4192개, Matrix4x4 112개)에서 188개로 아주 많이 줄었습니다.
-Forward+에서 사용하기 위한 AdditionalLight관련 값들이 가장 많았고 이외에는 URP의 ReflProbes관련 값이 많았습니다.
+Frame Debugger으로 확인한 상수버퍼의 float갯수가 4624개(float320개, vector4 4192개, Matrix4x4 112개)에서 188개로 아주 많이 줄었습니다.<br>
+Forward+에서 사용하기 위한 AdditionalLight관련 값들이 가장 많았고 이외에는 URP의 ReflProbes관련 값이 많았습니다.<br>
 
 ## 결과
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-005.png?raw=true"/>
 
-완전히 동일한 이미지를 약 40% 이상의 속도향상과 함깨 입력해야하는 항목이 간소해져서 관리가 쉬워졌습니다.
-Shader Graph화를 통해 확장이 용이해졌습니다.
+완전히 동일한 이미지를 약 40% 이상의 속도향상과 함깨 입력해야하는 항목이 간소해져서 관리가 쉬워졌습니다.<br>
+Shader Graph화를 통해 확장이 용이해졌습니다.<br>
 
 
 ## 외각선 보완
@@ -90,10 +90,9 @@ Shader Graph화를 통해 확장이 용이해졌습니다.
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/simple_outline_shadow.gif?raw=true"/>
 
 
-NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니다.
+NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니다.<br>
 
-
-하지만 UTS3에서 외각선을 사용하면 SRP Batch가 무력화되어 속도가 심각하게 느려집니다.
+하지만 UTS3에서 외각선을 사용하면 SRP Batch가 무력화되어 속도가 심각하게 느려집니다.<br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_failed_outline.gif?raw=true"/>
 
@@ -102,7 +101,15 @@ NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니�
 | UTS3 중앙값 | 2.06 ms | 6.55 ms | 2.06 ms | 6.57 ms |
 | UTS3+외각선 | 73 ms | 37 ms | 74 ms | 40 ms |
 
-프로젝트 주제였던 Shader Graph는 Multi Pass를 지원하지 않는다고 알고있습니다.
-Universal Renderer Data에서 Render Objects나 MaterialPropertyBlock을 사용하는 방법도 어울리지 않아 간단한 단색 외각선 Shader Graph를 작성하여 런타임에 외각선 매쉬를 직접 생성하는 테스트를 추가로 진행했습니다.
+Universal Renderer Data에서 Render Objects나 MaterialPropertyBlock을 사용하는 방법도 어울리지 않아 간단한 단색 외각선 Shader Graph를 작성하여 런타임에 외각선 매쉬를 직접 생성하는 추가 테스트를 진행했습니다.
+외각선용 Shader Graph의 이름은 MeshBackfaceOutline이고 내용은 아래와 같습니다.
+<img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-006.png?raw=true"/>
+
+Multi Pass Rendering이 아닌 일반적인 다른 오브젝트로 취급되자 SRP Batch가 활성화됨을 확인했습니다.
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_outline.gif?raw=true"/>
+
+| Case | 그림자OFF CPU | 그림자OFF GPU | 그림자ON CPU | 그림자ON GPU |
+| ------ | ------ | ------| ------ | ------ |
+| UTS3+MeshBackfaceOutline | 2.70~2.80 ms | 7.31~7.40 ms | 2.69~2.93 ms | 7.15~1.51 ms |
+| OPT+MeshBackfaceOutline | 2.63~2.73ms | 6.71~6.59 ms | 2.52~2.60 ms | 4.89~4.99 ms |
