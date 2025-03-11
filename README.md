@@ -105,11 +105,11 @@ Universal Renderer Data에서 Render Objects나 MaterialPropertyBlock을 사용�
 외각선용 Shader Graph의 이름은 MeshBackfaceOutline이고 내용은 아래와 같습니다.
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-006.png?raw=true"/>
 
-Multi Pass Rendering이 아닌 일반적인 다른 오브젝트로 취급되자 SRP Batch가 활성화됨을 확인했습니다.
+Multi Pass Rendering이 아닌 일반적인 다른 오브젝트로 취급되자 SRP Batch가 26회 진행됨을 확인했습니다.
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_outline.gif?raw=true"/>
 
 | Case | 그림자OFF CPU | 그림자OFF GPU | 그림자ON CPU | 그림자ON GPU |
 | ------ | ------ | ------| ------ | ------ |
-| UTS3+MeshBackfaceOutline | 2.70~2.80 ms | 7.31~7.40 ms | 2.69~2.93 ms | 7.15~1.51 ms |
-| OPT+MeshBackfaceOutline | 2.63~2.73ms | 6.71~6.59 ms | 2.52~2.60 ms | 4.89~4.99 ms |
+| UTS3+MeshBackfaceOutline | 4.31~4.51 ms | 5.88~5.91 ms | 4.26~4.63 ms | 5.82~5.89 ms |
+| OPT+MeshBackfaceOutline | 3.42~3.60ms | 3.12~3.35 ms | 3.53~3.73 ms | 3.18~3.31 ms |
