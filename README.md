@@ -3,7 +3,9 @@
 
 UTS3에 다양한 기능 지원은 Shader특성때문에 사용되지 않더라도 모든 계산을 진행합니다.
 UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해서 정리만 하더라도 최적화가 가능합니다.
-그리고 Shader Graph를 사용할 때에는 코드를 추가하지 않고 추가적인 기능추가도 가능합니다.
+그리고 Shader Graph를 사용하면 코드를 없이 기능추가도 가능합니다.
+
+작업한 Shader Graph의 경로는 Assets/UTS3_opt/Shader/UTS3_opt.shadergraph 입니다.
 
 임의로 캐릭터를 꾸며보고 여기에 사용된 기능들과 환경을 특정해서 최대한 Shader Graph로 옮겼습니다.
 일부 기능들은 Shader Graph에서 구현이 불가능하기 때문에, hlsl로 작성되었습니다. (그림자맵, 광원색상)
@@ -33,6 +35,17 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 - Angel Ring Projection Settings
 - Metaverse Settings
 </details>
+
+## UTS3과 렌더링 비교
+
+
+## 성능 테스트 구성
+
+Assets/Scenes/Scene_UTS3_Massive 씬과 Assets/Scenes/Scene_Opt_Massive를 실행해서 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.
+
+### 실행속도
+
+### SRP Batch
 
 ## 결과
 
