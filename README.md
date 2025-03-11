@@ -9,7 +9,7 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 일부 기능들은 Shader Graph에서 구현이 불가능하기 때문에, hlsl로 작성되었습니다. (그림자맵, 광원색상)
 
 <details>
-  <summary>작업 환경 & 사용한 기능 & 제외한 기능</summary>
+  <summary>작업 환경 & 사용한 기능 & 제외한 기능 (자세히..)</summary>
   
 작업 환경 : Unity6 (6000.0.41f1), URP, 포워드렌더링, Cascade Shadow Map, 메인광원1개
 
