@@ -2164,6 +2164,7 @@ GameObject:
   - component: {fileID: 11400002}
   - component: {fileID: 11400000}
   - component: {fileID: 11400004}
+  - component: {fileID: -1559939489626365557}
   m_Layer: 0
   m_Name: unitychan_custom
   m_TagString: Untagged
@@ -2279,6 +2280,20 @@ MonoBehaviour:
   timeBlink: 0.4
   threshold: 0.3
   interval: 3
+--- !u!114 &-1559939489626365557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100096}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62d20ab9ce721f45b0227b30af50c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _outlineShader: {fileID: -6465566751694194690, guid: 569671caf6561b34a81f35c1d13b7a7f, type: 3}
+  _outlineThickness: 0.003
 --- !u!1 &100098
 GameObject:
   m_ObjectHideFlags: 0

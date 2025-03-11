@@ -126,7 +126,7 @@ Material:
     - _RimLight_InsideMask: 0.0001
     - _RimLight_Power: 0.1
     - _SHADOWS_SOFT: 0
-    - _Set_SystemShadowsToBase: 0
+    - _Set_SystemShadowsToBase: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
