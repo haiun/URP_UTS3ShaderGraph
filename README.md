@@ -1,7 +1,8 @@
 # URP_UTS3ShaderGraph
-이 프로젝트는 Unity엔진에서 NPR(Non-Photo Realistic)렌더링 셰이더로 유명한 UTS3(Unity-Chan Toon Shader 3)의 일부 기능을 임의로 Shader Graph로 컨버팅하고 최적화를 진행하였습니다.
+이 프로젝트는 Unity엔진에서 NPR(Non-Photo Realistic)렌더링 셰이더로 유명한 UTS3(Unity Toon Shader)의 일부 기능을 임의로 Shader Graph로 컨버팅하고 최적화를 진행하였습니다.
+UTS3 링크 : https://docs.unity3d.com/Packages/com.unity.toonshader@0.11/manual/index.html
 
-UTS3에 다양한 기능 지원은 Shader특성때문에 사용되지 않더라도 모든 계산을 진행합니다.
+UTS3는 다양한 기능 지원하고 각 기능들의 계산 결과를 마지막에 선별하는 Shader특성 때문에 사용되지 않더라도 모든 계산을 진행합니다.
 UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해서 정리만 하더라도 최적화가 가능합니다.
 그리고 Shader Graph를 사용하면 코드를 없이 기능추가도 가능합니다.
 
@@ -39,13 +40,32 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 ## UTS3과 렌더링 비교
 
 
-## 성능 테스트 구성
+## 성능 비교
 
 Assets/Scenes/Scene_UTS3_Massive 씬과 Assets/Scenes/Scene_Opt_Massive를 실행해서 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.
+UnityEditor/4K UHD 해상도에 배치상태가 동일하고 DrawOpaqueObjects의 SRP Batch가 17회로 완전히 똑같은 환경에서 Shader교체하면서 테스트했습니다.
 
-### 실행속도
+### 실행 속도
 
-### SRP Batch
+Rendering Debugger / Display Stats에서 DrawOpaqueObjects CPU/GPU 항목에서 유의미한 수치 변화가 있었습니다.
+
+| Case | 그림자OFF CPU | 그림자OFF GPU | 그림자ON CPU | 그림자ON GPU |
+| ------ | ------ | ------| ------ | ------ |
+| UTS3 | 2.02~2.10 ms | 6.51~6.60 ms | 2.02~2.10 ms | 6.54~6.60 ms |
+| OPT | 1.39~1.42 ms | 2.81~2.90 ms | 1.48~1.50 ms | 4.59~4.70 ms |
+| 속도향상 | +46.6% | +132.5% | +38.3% | +44.3% |
 
 ## 결과
+
+최저 약 40%의 속도향상과 함깨 입력해야하는 항목이 간소해져서 관리가 쉬워졌습니다.
+Shader Graph화를 통해 확장이 용이해졌습니다.
+
+
+## 외각선 보완
+
+NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니다.
+하지만 UTS3에서 외각선을 사용하면 SRP Batch가 무력화되어 속도가 심각하게 느려집니다.
+
+테스트 환경 기준 시간
+그림자OFF 73ms / 37ms , 그림자ON 74ms / 40ms
 
