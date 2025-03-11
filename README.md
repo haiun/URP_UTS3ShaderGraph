@@ -1,7 +1,8 @@
 # URP_UTS3ShaderGraph
-이 프로젝트는 Unity엔진에서 NPR(Non-Photo Realistic)렌더링 셰이더로 유명한 UTS3(Unity-Chan Toon Shader 3)의 일부 기능을 임의로 Shader Graph로 컨버팅하고 최적화를 진행하였습니다.
+이 프로젝트는 Unity엔진에서 NPR(Non-Photo Realistic)렌더링 셰이더로 유명한 UTS3(Unity Toon Shader)의 일부 기능을 임의로 Shader Graph로 컨버팅하고 최적화를 진행하였습니다.
+UTS3 링크 : https://docs.unity3d.com/Packages/com.unity.toonshader@0.11/manual/index.html
 
-UTS3에 다양한 기능 지원은 Shader특성때문에 사용되지 않더라도 모든 계산을 진행합니다.
+UTS3는 다양한 기능 지원하고 각 기능들의 계산 결과를 마지막에 선별하는 Shader특성 때문에 사용되지 않더라도 모든 계산을 진행합니다.
 UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해서 정리만 하더라도 최적화가 가능합니다.
 그리고 Shader Graph를 사용하면 코드를 없이 기능추가도 가능합니다.
 
@@ -39,13 +40,15 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 ## UTS3과 렌더링 비교
 
 
-## 성능 테스트 구성
+## 성능 비교
 
 Assets/Scenes/Scene_UTS3_Massive 씬과 Assets/Scenes/Scene_Opt_Massive를 실행해서 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.
+4k해상도에 배치상태가 동일하고 DrawOpaqueObjects의 SRP Batch가 17회로 완전히 똑같은 환경에서 Shader교체하면서 테스트했습니다.
 
-### 실행속도
+### 실행 속도
 
 ### SRP Batch
 
 ## 결과
 
+## 보완
