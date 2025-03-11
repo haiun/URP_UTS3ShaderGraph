@@ -19,7 +19,7 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 <details>
   <summary>작업 환경 & 사용한 기능 & 제외한 기능 (자세히..)</summary>
   
-작업 환경 : Unity6 (6000.0.41f1), URP, 포워드렌더링, Cascade Shadow Map, 메인광원1개
+작업 환경 : Unity6 (6000.0.41f1), URP, 포워드렌더링, Cascade Shadow Map, 메인광원1개<br>
 
 사용한 기능
 - Three Color Map and Control Map Settings
@@ -57,14 +57,14 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/speed_test.png?raw=true"/>
 
-Assets/Scenes/Scene_UTS3_Massive 씬과 Assets/Scenes/Scene_Opt_Massive를 실행해서 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.
-UnityEditor/4K UHD 해상도에 배치상태가 동일하고 DrawOpaqueObjects의 SRP Batch가 17회로 완전히 동일한 환경에서 Shader교체하면서 테스트했습니다.
+Assets/Scenes/Scene_UTS3_Massive 씬과 Assets/Scenes/Scene_Opt_Massive를 실행해서 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.<br>
+UnityEditor/4K UHD 해상도에 배치상태가 동일하고 DrawOpaqueObjects의 SRP Batch가 17회로 완전히 동일한 환경에서 Shader교체하면서 프로파일링 테스트를 했습니다.<br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_17.gif?raw=true"/>
 
 ### 실행 속도
 
-Rendering Debugger / Display Stats에서 DrawOpaqueObjects CPU/GPU 항목에서 유의미한 수치 변화가 있었습니다.
+Rendering Debugger / Display Stats에서 DrawOpaqueObjects CPU/GPU 항목에서 유의미한 수치 변화가 있었습니다.<br>
 
 | Case | 그림자OFF CPU | 그림자OFF GPU | 그림자ON CPU | 그림자ON GPU |
 | ------ | ------ | ------| ------ | ------ |
@@ -92,7 +92,7 @@ Shader Graph화를 통해 확장이 용이해졌습니다.<br>
 
 NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니다.<br>
 
-하지만 UTS3에서 외각선을 사용하면 SRP Batch가 무력화되어 속도가 심각하게 느려집니다.<br>
+하지만 UTS3에서 외각선을 사용하면 SRP Batch가 무력화되어 속도가 심각하게 느려지는 현상을 발견했습니다.<br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_failed_outline.gif?raw=true"/>
 
@@ -105,9 +105,10 @@ Universal Renderer Data에서 Render Objects나 MaterialPropertyBlock을 사용�
 외각선용 Shader Graph의 이름은 MeshBackfaceOutline이고 내용은 아래와 같습니다.
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-006.png?raw=true"/>
 
-Multi Pass Rendering이 아닌 일반적인 다른 오브젝트로 취급되자 SRP Batch가 26회 진행됨을 확인했습니다.
-
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_outline.gif?raw=true"/>
+Multi Pass Rendering이 아닌 일반적인 다른 오브젝트로 취급되자 SRP Batch가 26회 진행됨을 확인했습니다.
+물리적으로 오브젝트가 약 2배가량 늘었기 때문에 어느정도 비례하여 시간이 소요될 것으로 추측했습니다.
+테스트 결과도 예상과 비슷했습니다.
 
 | Case | 그림자OFF CPU | 그림자OFF GPU | 그림자ON CPU | 그림자ON GPU |
 | ------ | ------ | ------| ------ | ------ |
