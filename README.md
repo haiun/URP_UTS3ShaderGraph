@@ -5,7 +5,7 @@ UTS3 링크 : https://docs.unity3d.com/Packages/com.unity.toonshader@0.11/manual
 
 UTS3는 다양한 기능 지원하고 각 기능들의 계산 결과를 마지막에 선별하는 Shader특성 때문에 사용되지 않더라도 모든 계산을 진행합니다.<br>
 UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해서 정리만 하더라도 최적화가 가능합니다.<br>
-그리고 Shader Graph를 사용하면 코드를 없이 기능추가도 가능합니다.<br>
+그리고 Shader Graph를 사용하면 코드를 없이 기능추가도 가능하며 협업시 커뮤니케이션에 활용됩니다.<br>
 <br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/shadergraph.png?raw=true"/>
@@ -14,7 +14,7 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 이후 Shader Graph버전의 명칭을 OPT라고 명시하겠습니다.<br>
 <br>
 임의로 캐릭터를 꾸며보고 여기에 사용된 기능들과 환경을 특정해서 최대한 Shader Graph로 옮겼습니다.<br>
-일부 기능들은 Shader Graph에서 구현이 불가능하기 때문에, hlsl로 작성되었습니다. (그림자맵, 광원색상)<br>
+일부 기능들은 Shader Graph에서 구현이 불가능하기 때문에, hlsl로 작성되었습니다. (그림자감쇠값, 광원색상)<br>
 
 <details>
   <summary>작업 환경 & 사용한 기능 & 제외한 기능 (자세히..)</summary>
@@ -84,7 +84,7 @@ Forward+에서 사용하기 위한 AdditionalLight관련 값들이 가장 많았
 완전히 동일한 이미지를 약 40% 이상의 속도향상과 함깨 입력해야하는 항목이 간소해져서 관리가 쉬워졌습니다.<br>
 Shader Graph화를 통해 확장이 용이해졌습니다.<br>
 
-부가적으로 WebGL빌드가 FireFox에서만 실행 되었는데, 다른 브라우저에서도 실행될 정도로 Shader가 가벼워졌습니다.<br>
+부가적으로 메인조명 1개만 사용하여 플랫폼 제한이 확장되어 FireFox에서만 실행되던 WebGL빌드가 크롬/엣지 브라우저에서도 실행될 정도로 Shader가 가벼워졌습니다.<br>
 
 
 ## 외각선 보완
@@ -96,7 +96,7 @@ Shader Graph화를 통해 확장이 용이해졌습니다.<br>
 
 NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니다.<br>
 
-하지만 UTS3에서 외각선이 Multi Pass Rendering으로 구현되어 있기 때문에 비슷한 Material끼리 연속해서 그리는 것이 중요한 SRP Batch가 무력화되어 속도가 심각하게 느려지는 현상을 발견했습니다.<br>
+하지만 UTS3에서 외각선이 Multi Pass Rendering으로 구현되어 있기 때문에 비슷한 Material을 연속해서 그리는 것이 중요한 SRP Batch의 최적화가 무력화되어 횟수가 4115번으로 늘어나면서 속도가 심각하게 느려지는 현상을 확인했습니다.<br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_failed_outline.gif?raw=true"/>
 
