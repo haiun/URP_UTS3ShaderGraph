@@ -11,7 +11,7 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/shadergraph.png?raw=true"/>
 
 작업한 Shader Graph의 경로는 'Assets/UTS3_opt/Shader/UTS3_opt.shadergraph' 입니다.<br>
-이후 Shader Graph버전의 명칭을 OPT라고 명시하겠습니다.<br>
+사용한 기능들만 선택해서 재구성한 Shader Graph버전의 명칭을 'OPT'(Optimal)라고 명시하겠습니다.<br>
 <br>
 임의로 캐릭터를 꾸며보고 여기에 사용된 기능들과 환경을 특정해서 최대한 Shader Graph로 옮겼습니다.<br>
 일부 기능들은 Shader Graph에서 구현이 불가능하기 때문에, hlsl로 작성되었습니다. (그림자감쇠값, 광원색상)<br>
@@ -139,4 +139,5 @@ DrawOpaqueObjects CPU/GPU 항목에서 측정한 시간은 아래와 같습니�
 | OPT+MeshBackfaceOutline | 3.42~3.60ms | 3.12~3.35 ms | 3.53~3.73 ms | 3.18~3.31 ms |
 
 수치 비교는 DrawOpaqueObjects항목만 했지만, 그림자맵을 포함 다른 여러 부분에서 CPU부하가 비례해서 약 2배 늘어났습니다.<br>
+하지만 UTS3의 외각선을 사용한 속도보다 훨씬 가벼웠습니다.<br>
 UTS3의 효과품질에 비해 외각선 기본에 충실한 표현이지만, 비교적 10배 이상의 아주 빠른 성능을 확인했습니다.
