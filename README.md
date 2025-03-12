@@ -55,7 +55,7 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/speed_test.png?raw=true"/>
 
-'Assets/Scenes/Scene_UTS3_Massive.unity'와 'Assets/Scenes/Scene_Opt_Massive.unity'를 실행해서 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.<br>
+'Assets/Scenes/Scene_UTS3_Massive.unity'와 'Assets/Scenes/Scene_Opt_Massive.unity'로 다른 Shader를 사용한 두 Scene을 구성한 뒤 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.<br>
 DrawOpaqueObjects의 SRP Batch가 17회로 완전히 동일함을 확인 후 Shader가 병목지점이 될 수 있도록 4K UHD 해상도로 만들어서 11x11개의 캐릭터 렌더링에 대한 프로파일링 테스트를 했습니다.<br>
 
 [링크 - 웹에서 테스트 배치 보기](https://haiun.github.io/UnityChan_TEST/ "WebGl버전 실행")<br>
