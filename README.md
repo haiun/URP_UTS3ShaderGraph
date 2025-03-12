@@ -5,7 +5,7 @@ UTS3 링크 : https://docs.unity3d.com/Packages/com.unity.toonshader@0.11/manual
 
 UTS3는 다양한 기능 지원하고 각 기능들의 계산 결과를 마지막에 선별하는 Shader특성 때문에 사용되지 않더라도 모든 계산을 진행합니다.<br>
 UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해서 정리만 하더라도 최적화가 가능합니다.<br>
-그리고 Shader Graph를 사용하면 코드를 없이 기능추가도 가능합니다.<br>
+그리고 Shader Graph를 사용하면 코드를 없이 기능추가도 가능하며 협업시 커뮤니케이션에 활용됩니다.<br>
 <br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/shadergraph.png?raw=true"/>
@@ -14,7 +14,7 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 이후 Shader Graph버전의 명칭을 OPT라고 명시하겠습니다.<br>
 <br>
 임의로 캐릭터를 꾸며보고 여기에 사용된 기능들과 환경을 특정해서 최대한 Shader Graph로 옮겼습니다.<br>
-일부 기능들은 Shader Graph에서 구현이 불가능하기 때문에, hlsl로 작성되었습니다. (그림자맵, 광원색상)<br>
+일부 기능들은 Shader Graph에서 구현이 불가능하기 때문에, hlsl로 작성되었습니다. (그림자감쇠값, 광원색상)<br>
 
 <details>
   <summary>작업 환경 & 사용한 기능 & 제외한 기능 (자세히..)</summary>
@@ -58,7 +58,9 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/speed_test.png?raw=true"/>
 
 Assets/Scenes/Scene_UTS3_Massive 씬과 Assets/Scenes/Scene_Opt_Massive를 실행해서 Rendering Debugger로 실행속도와 Frame Debugger로 SRP Batch구조를 비교합니다.<br>
-UnityEditor/4K UHD 해상도에 배치상태가 동일하고 DrawOpaqueObjects의 SRP Batch가 17회로 완전히 동일한 환경에서 Shader교체하면서 프로파일링 테스트를 했습니다.<br>
+DrawOpaqueObjects의 SRP Batch가 17회로 완전히 동일함을 확인 후 Shader가 병목지점이 될 수 있도록 4K UHD 해상도로 만들어서 Shader교체하며 프로파일링 테스트를 했습니다.<br>
+
+[링크 - 웹에서 테스트 보기](https://haiun.github.io/UnityChan_TEST/ "웹에서 실행")<br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_17.gif?raw=true"/>
 
@@ -82,6 +84,8 @@ Forward+에서 사용하기 위한 AdditionalLight관련 값들이 가장 많았
 완전히 동일한 이미지를 약 40% 이상의 속도향상과 함깨 입력해야하는 항목이 간소해져서 관리가 쉬워졌습니다.<br>
 Shader Graph화를 통해 확장이 용이해졌습니다.<br>
 
+부가적으로 메인조명 1개만 사용하여 플랫폼 제한이 확장되어 FireFox에서만 실행되던 WebGL빌드가 크롬/엣지 브라우저에서도 실행될 정도로 Shader가 가벼워졌습니다.<br>
+
 
 ## 외각선 보완
 
@@ -92,7 +96,7 @@ Shader Graph화를 통해 확장이 용이해졌습니다.<br>
 
 NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니다.<br>
 
-하지만 UTS3에서 외각선을 사용하면 SRP Batch가 무력화되어 속도가 심각하게 느려지는 현상을 발견했습니다.<br>
+하지만 UTS3에서 외각선이 Multi Pass Rendering으로 구현되어 있기 때문에 비슷한 Material을 연속해서 그리는 것이 중요한 SRP Batch의 최적화가 무력화되어 횟수가 4115번으로 늘어나면서 속도가 심각하게 느려지는 현상을 확인했습니다.<br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_failed_outline.gif?raw=true"/>
 
@@ -101,16 +105,23 @@ NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니�
 | UTS3 중앙값 | 2.06 ms | 6.55 ms | 2.06 ms | 6.57 ms |
 | UTS3+외각선 | 73 ms | 37 ms | 74 ms | 40 ms |
 
-Universal Renderer Data에서 Render Objects나 MaterialPropertyBlock을 사용하는 방법도 어울리지 않아 간단한 단색 외각선 Shader Graph를 작성하여 런타임에 외각선 매쉬를 직접 생성하는 추가 테스트를 진행했습니다.
-외각선용 Shader Graph의 이름은 MeshBackfaceOutline이고 내용은 아래와 같습니다.
+Universal Renderer Data에서 Render Objects나 MaterialPropertyBlock을 사용하는 방법도 어울리지 않아 간단한 단색 외각선 Shader Graph를 작성하여 런타임에 외각선 매쉬를 직접 생성하는 추가 테스트를 진행했습니다.<br>
+외각선용 Shader Graph의 이름은 MeshBackfaceOutline이고 내용은 아래와 같습니다.<br>
+
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-006.png?raw=true"/>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/srp_batch_outline.gif?raw=true"/>
-Multi Pass Rendering이 아닌 일반적인 다른 오브젝트로 취급되자 SRP Batch가 26회 진행됨을 확인했습니다.
-물리적으로 오브젝트가 약 2배가량 늘었기 때문에 어느정도 비례하여 시간이 소요될 것으로 추측했습니다.
-테스트 결과도 예상과 비슷했습니다.
+
+Multi Pass Rendering이 아닌 일반적인 다른 오브젝트로 취급되자 SRP Batch가 26회 진행됨을 확인했습니다.<br>
+물리적으로 오브젝트가 약 2배가량 늘었기 때문에 모든 수행시간이 어느정도 비례하여 시간이 소요될 것으로 추측했습니다.<br>
+테스트 결과도 예상과 비슷했습니다.<br>
+
+DrawOpaqueObjects CPU/GPU 항목에서 측정한 시간은 아래와 같습니다.
 
 | Case | 그림자OFF CPU | 그림자OFF GPU | 그림자ON CPU | 그림자ON GPU |
 | ------ | ------ | ------| ------ | ------ |
 | UTS3+MeshBackfaceOutline | 4.31~4.51 ms | 5.88~5.91 ms | 4.26~4.63 ms | 5.82~5.89 ms |
 | OPT+MeshBackfaceOutline | 3.42~3.60ms | 3.12~3.35 ms | 3.53~3.73 ms | 3.18~3.31 ms |
+
+외각선이 없이 측정했던 수치와 비교해서 테스트환경은 GPU병목에서 CPU병목현상으로 전환됨을 확인했습니다.<br>
+수치 비교는 DrawOpaqueObjects항목만 했지만, 그림자맵을 포함 다른 여러 부분에서 CPU부하가 비례해서 약 2배 늘어났습니다.<br>
