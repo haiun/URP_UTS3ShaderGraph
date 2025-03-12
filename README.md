@@ -45,8 +45,8 @@ UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해
 ## UTS3과 렌더링 비교
 
 
-두 Shader의 결과물이 동일한지 비교한 결과입니다.
-(좌 UTS3 / 우 OPT)<br>
+두 Shader의 결과물이 동일한지 비교한 결과입니다.<br>
+(좌 UTS3 / 우 OPT / 상 그림자 OFF / 하 그림자 ON)<br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/comp_no_shadow.gif?raw=true"/>
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/comp_shadow.gif?raw=true"/>
@@ -119,6 +119,7 @@ Universal Renderer Data에서 Render Objects나 MaterialPropertyBlock을 사용�
 
 ### 렌더링
 
+(좌 UTS3 / 우 OPT / 상 그림자 OFF / 하 그림자 ON)<br>
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/simple_outline.gif?raw=true"/>
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/simple_outline_shadow.gif?raw=true"/>
 
