@@ -1,5 +1,5 @@
 # URP_UTS3ShaderGraph
-이 프로젝트는 Unity엔진에서 NPR(Non-Photo Realistic)렌더링 셰이더로 유명한 UTS3(Unity Toon Shader)의 일부 기능을 임의로 Shader Graph로 변환하고 최적화를 진행하였습니다.<br>
+이 프로젝트는 Unity엔진에서 NPR(Non-Photo Realistic)렌더링 Shader로 유명한 UTS3(Unity Toon Shader)의 일부 기능을 임의로 Shader Graph로 변환하고 최적화를 진행하였습니다.<br>
 UTS3 링크 : https://docs.unity3d.com/Packages/com.unity.toonshader@0.11/manual/index.html <br>
 <br>
 
