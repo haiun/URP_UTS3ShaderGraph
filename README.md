@@ -96,7 +96,9 @@ UTS3과 Shader Property를 동일하게 사용하기 때문에 기존 UTS3Shader
 
 NPR에서 외각선 사용여부에 따라 화면의 느낌이 많이 바뀝니다.<br>
 
+<img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-015.png?raw=true"/>
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-012.png?raw=true"/>
+<img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-017.png?raw=true"/>
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/K-013.png?raw=true"/>
 
 하지만 UTS3에서 외각선이 Multi Pass Rendering으로 구현되어 있기 때문에 비슷한 Material을 연속해서 그리는 것이 중요한 SRP Batch의 최적화가 무력화되어 횟수가 4115번으로 늘어나면서 속도가 심각하게 느려지는 현상을 확인했습니다.<br>
