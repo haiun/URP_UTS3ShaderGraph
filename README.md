@@ -5,7 +5,7 @@ UTS3 링크 : https://docs.unity3d.com/Packages/com.unity.toonshader@0.11/manual
 
 UTS3는 다양한 기능 지원하고 각 기능들의 계산 결과를 마지막에 선별하는 Shader특성 때문에 사용되지 않더라도 모든 계산을 진행합니다.<br>
 UTS3를 사용해서 아트워크를 구성한 후 사용된 기능만 추출해서 정리만 하더라도 최적화가 가능합니다.<br>
-그리고 Shader Graph를 사용하면 코드 수정 없이 기능 추가도 가능하며 협업 시 커뮤니케이션에 활용됩니다.<br>
+그리고 Shader Graph를 사용하면 코드 수정 없이 기능 추가도 가능하며 협업 시 커뮤니케이션에 활용하면 도움이 됩니다.<br>
 <br>
 
 <img src="https://github.com/haiun/URP_UTS3ShaderGraph/blob/main/ReadmeImage/shadergraph.png?raw=true"/>
